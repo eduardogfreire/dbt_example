@@ -17,4 +17,20 @@ clean-targets:
 
 models:
   dbt_example:
-    +materialized: view
+    staging:
+      schema: staging
+      +materialized: table
+      tags: ["staging"]
+
+    intermediate:
+      +materialized: ephemeral
+      tags: ['staging']
+
+    marts:
+      schema: marts
+      +materialized: table 
+      tags: ['marts']
+seeds:
+  dbt_example:
+    +schema: seeds
+    tags: ['seeds']

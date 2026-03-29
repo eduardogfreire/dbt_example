@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: finance
+    description: "dados brutos do sistema bruto financeiro"
+    schema: data_set_financial
+    loader: bigquery
+    loaded_at_field: data_carga
+    config:
+      freshness:
+        warn_after: {count: 1, period: day}
+        error_after: {count: 2, period: day}
+    meta:
+      owner: "empresa tal"
+
+    tables:
+      - name: lancamentos_financeiros
+        description: "Tabela com os lançamentos financeiros da empresa"
+        columns:
+          - name: Transaction_id
+            description: "id da transacao"
+            data_tests:
+              - not_null

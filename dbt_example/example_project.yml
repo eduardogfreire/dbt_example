@@ -1,0 +1,62 @@
+name: 'dbt_example'
+version: '1.0.0'
+config-version: 2
+
+#definicao do perfil que conecta ao data warehouse
+profile: 'dbt_example'
+
+# Caminho de pastas onde o DBT enctrar'a os modelos, macros e seeds
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Caminho onde os artefatos de execução são armazenados
+target-path: "target"
+
+#Diretório limpos com o comando dbt clean
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+#Config de logs
+log-path: "logs"
+log-format: "json"
+
+#Configurações de modelos
+models:
+  dbt_example:
+    staging:
+      schema: staging
+      +materialized: table
+
+    intermediate:
+      materialized: ephemeral
+      tags: ['staging']
+
+    marts:
+      schema: marts
+      materialized: table 
+      tags: ['marts']
+
+# Configuracoes de Seedsm (dados estátocos)
+seeds:
+  dbt_example:
+    schema: seeds
+    quote_columns: true
+
+# Configuracoes de teste para garantifr a qualidade dos dados
+tests:
+  default:
+    unique: true
+    not_null: true
+
+# Pacotes externos
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 0.7.0
+
+# Debugging
+debug: true

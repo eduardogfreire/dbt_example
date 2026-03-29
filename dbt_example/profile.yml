@@ -6,6 +6,8 @@ dbt_example:
       method: service-account
       keyfile: /home/edu/.dbt/dbt-aprendendo-88a7436030fe.json
       project: dbt-aprendendo
-      dataset: "{{ env_var('DBT_DBNAME', 'dbt_dw') }}
+      dataset: "{{ env_var('DBT_DBNAME', 'dbt_dw') }}"
       threads: 4
-      keyfile: /home/edu/.dbt/dbt-aprendendo-88a7436030fe.json
+      location: US
+      priority: interactive
+      timeout_seconds: 300
