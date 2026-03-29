@@ -1,0 +1,98 @@
+version: 2
+
+sources:
+  - name: northwind
+    description: "dados brutos da base Northwind"
+    schema: dbt_dw_seeds
+    loader: bigquery
+    config:
+      meta:
+        owner: "empresa tal"
+
+    tables:
+      - name: customers
+        description: "Tabela com os clientes da base Northwind"
+        columns:
+          - name: customerID
+            description: "id do cliente"
+            data_tests:
+              - not_null
+              - unique
+
+          - name: companyName
+            description: "nome da empresa cliente"
+
+          - name: contactName
+            description: "nome da pessoa de contato"
+
+          - name: contactTitle
+            description: "cargo da pessoa de contato"
+
+          - name: address
+            description: "endereço do cliente"
+
+          - name: city
+            description: "cidade do cliente"
+
+          - name: region
+            description: "região ou estado do cliente"
+
+          - name: postalCode
+            description: "código postal do cliente"
+
+          - name: country
+            description: "país do cliente"
+
+          - name: phone
+            description: "telefone do cliente"
+
+          - name: fax
+            description: "fax do cliente"
+
+      - name: orders
+        description: "Tabela com os pedidos da base Northwind"
+        columns:
+          - name: orderID
+            description: "id do pedido"
+            data_tests:
+              - not_null
+              - unique
+
+          - name: customerID
+            description: "id do cliente"
+
+          - name: employeeID
+            description: "id do funcionário responsável pelo pedido"
+
+          - name: orderDate
+            description: "data do pedido"
+
+          - name: requiredDate
+            description: "data requerida para entrega"
+
+          - name: shippedDate
+            description: "data de envio"
+
+          - name: shipVia
+            description: "id do transportador"
+
+          - name: freight
+            description: "valor do frete"
+
+          - name: shipName
+            description: "nome de entrega"
+
+          - name: shipAddress
+            description: "endereço de entrega"
+
+          - name: shipCity
+            description: "cidade de entrega"
+
+          - name: shipRegion
+            description: "região de entrega"
+
+          - name: shipPostalCode
+            description: "cep de entrega"
+
+          - name: shipCountry
+            description: "país de entrega"
